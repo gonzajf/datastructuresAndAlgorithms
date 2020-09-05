@@ -210,8 +210,26 @@ public class ArraySolutions {
 		}
 	}
 	
-	public static void main(String[] args) {
-		int[] nums = {0,1,0,3,12};
-		moveZeroes(nums);
-	}
+	/**
+	 * Given an array A of non-negative integers, return an array consisting of all the even elements of A, 
+	 * followed by all the odd elements of A. 
+	 * You may return any answer array that satisfies this condition. 
+	 */
+    public static int[] sortArrayByParity(int[] A) {
+       
+		int oddPointer = -1;
+		for (int i = 0; i < A.length; i++) {
+
+			if(oddPointer == -1 && A[i]%2 != 0) {
+				oddPointer = i;
+			}
+			if(oddPointer != -1 && A[i]%2 == 0) {
+				int temp = A[oddPointer];
+				A[oddPointer] = A[i];
+				A[i] = temp;
+				oddPointer++;
+			}			
+		}
+    	return A;
+    }
 }
