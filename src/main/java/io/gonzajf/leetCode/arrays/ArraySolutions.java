@@ -131,12 +131,11 @@ public class ArraySolutions {
 	public static boolean checkIfExist(int[] arr) {
 
 		Map<Integer, Integer> map = new HashMap<>();
-		
-		for(int n: arr) {
-			
-			if(!map.containsKey(n*2) && 
-					!(map.containsKey(n/2) && n%2 == 0)) {
-				
+
+		for (int n : arr) {
+
+			if (!map.containsKey(n * 2) && !(map.containsKey(n / 2) && n % 2 == 0)) {
+
 				map.put(n, 1);
 			} else {
 				return true;
@@ -144,52 +143,75 @@ public class ArraySolutions {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Given an array A of integers, return true if and only if it is a valid mountain array.
-	 * Recall that A is a mountain array if and only if:
-	 * A.length >= 3
-	 * There exists some i with 0 < i < A.length - 1 such that:
-	 * 	 A[0] < A[1] < ... A[i-1] < A[i]
-	 * 	 A[i] > A[i+1] > ... > A[A.length - 1]
+	 * Given an array A of integers, return true if and only if it is a valid
+	 * mountain array. Recall that A is a mountain array if and only if: A.length >=
+	 * 3 There exists some i with 0 < i < A.length - 1 such that: A[0] < A[1] < ...
+	 * A[i-1] < A[i] A[i] > A[i+1] > ... > A[A.length - 1]
 	 */
-    public static boolean validMountainArray(int[] A) {
-        
-    	int i = 0;
-    	
-    	while(i < A.length && i+1 < A.length && A[i] < A[i+1]) {
-    		i++;
-    	}
-    	
-    	if(i == 0 || i+1 >= A.length) {
-    		return false;
-    	}
-    	
-    	while(i < A.length && i+1 < A.length) {
-    		if(A[i] <= A[i++ +1]) {
-    			return false;
-    		}
-    	}
-    	return true;
-    }
-    
-    /**
-     * Given an array arr, replace every element in that array with the greatest 
-     * element among the elements to its right, and replace the last element with -1.
-     * After doing so, return the array.
-     */
-    public static int[] replaceElements(int[] arr) {
-        
-    	int max = arr[arr.length-1];
-    	arr[arr.length-1] = -1;
-    	
-    	for (int i = arr.length-1; i > 0 ; i--) {
-    		int prev = arr[i-1];
-    		arr[i-1] = max;
-    		if(prev > max) {
-    			max = prev;
-    		}
+	public static boolean validMountainArray(int[] A) {
+
+		int i = 0;
+
+		while (i < A.length && i + 1 < A.length && A[i] < A[i + 1]) {
+			i++;
 		}
-    	return arr;
-    }
+
+		if (i == 0 || i + 1 >= A.length) {
+			return false;
+		}
+
+		while (i < A.length && i + 1 < A.length) {
+			if (A[i] <= A[i++ + 1]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Given an array arr, replace every element in that array with the greatest
+	 * element among the elements to its right, and replace the last element with
+	 * -1. After doing so, return the array.
+	 */
+	public static int[] replaceElements(int[] arr) {
+
+		int max = arr[arr.length - 1];
+		arr[arr.length - 1] = -1;
+
+		for (int i = arr.length - 1; i > 0; i--) {
+			int prev = arr[i - 1];
+			arr[i - 1] = max;
+			if (prev > max) {
+				max = prev;
+			}
+		}
+		return arr;
+	}
+
+	/**
+	 * Given an array nums, write a function to move all 0's to the end of it
+	 * while maintaining the relative order of the non-zero elements.
+	 */
+	public static void moveZeroes(int[] nums) {
+		
+		int zeroPointer = -1;
+		for (int i = 0; i < nums.length; i++) {
+
+			if(zeroPointer == -1 && nums[i] == 0) {
+				zeroPointer = i;
+			}
+			if(zeroPointer != -1 && nums[i] != 0) {
+				nums[zeroPointer] = nums[i];
+				nums[i] = 0;
+				zeroPointer++;
+			}			
+		}
+	}
+	
+	public static void main(String[] args) {
+		int[] nums = {0,1,0,3,12};
+		moveZeroes(nums);
+	}
 }
