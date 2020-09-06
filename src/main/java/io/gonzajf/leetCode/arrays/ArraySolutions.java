@@ -191,45 +191,66 @@ public class ArraySolutions {
 	}
 
 	/**
-	 * Given an array nums, write a function to move all 0's to the end of it
-	 * while maintaining the relative order of the non-zero elements.
+	 * Given an array nums, write a function to move all 0's to the end of it while
+	 * maintaining the relative order of the non-zero elements.
 	 */
 	public static void moveZeroes(int[] nums) {
-		
+
 		int zeroPointer = -1;
 		for (int i = 0; i < nums.length; i++) {
 
-			if(zeroPointer == -1 && nums[i] == 0) {
+			if (zeroPointer == -1 && nums[i] == 0) {
 				zeroPointer = i;
 			}
-			if(zeroPointer != -1 && nums[i] != 0) {
+			if (zeroPointer != -1 && nums[i] != 0) {
 				nums[zeroPointer] = nums[i];
 				nums[i] = 0;
 				zeroPointer++;
-			}			
+			}
 		}
 	}
-	
+
 	/**
-	 * Given an array A of non-negative integers, return an array consisting of all the even elements of A, 
-	 * followed by all the odd elements of A. 
-	 * You may return any answer array that satisfies this condition. 
+	 * Given an array A of non-negative integers, return an array consisting of all
+	 * the even elements of A, followed by all the odd elements of A. You may return
+	 * any answer array that satisfies this condition.
 	 */
-    public static int[] sortArrayByParity(int[] A) {
-       
+	public static int[] sortArrayByParity(int[] A) {
+
 		int oddPointer = -1;
 		for (int i = 0; i < A.length; i++) {
 
-			if(oddPointer == -1 && A[i]%2 != 0) {
+			if (oddPointer == -1 && A[i] % 2 != 0) {
 				oddPointer = i;
 			}
-			if(oddPointer != -1 && A[i]%2 == 0) {
+			if (oddPointer != -1 && A[i] % 2 == 0) {
 				int temp = A[oddPointer];
 				A[oddPointer] = A[i];
 				A[i] = temp;
 				oddPointer++;
-			}			
+			}
 		}
-    	return A;
-    }
+		return A;
+	}
+
+	/**
+	 * Students are asked to stand in non-decreasing order of heights for an annual
+	 * photo. Return the minimum number of students that must move in order for all
+	 * students to be standing in non-decreasing order of height. Notice that when a
+	 * group of students is selected they can reorder in any possible way between
+	 * themselves and the non selected students remain on their seats.
+	 */
+	public static int heightChecker(int[] heights) {
+
+		int swaps = 0;
+		int[] copy = heights.clone();
+		Arrays.sort(copy);
+
+		for (int i = 0; i < heights.length; i++) {
+			if(heights[i] != copy[i]) {
+				swaps++;
+			}
+		}
+		return swaps;
+	}
 }
