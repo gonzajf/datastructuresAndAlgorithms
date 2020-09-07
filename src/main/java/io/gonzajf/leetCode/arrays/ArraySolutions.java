@@ -253,4 +253,39 @@ public class ArraySolutions {
 		}
 		return swaps;
 	}
+	
+	
+	/**
+	 * Given a non-empty array of integers, return the third maximum number in this array. 
+	 * If it does not exist, return the maximum number. 
+	 * The time complexity must be in O(n).
+	 */
+    public static int thirdMax(int[] nums) {
+
+    	long max = nums[0];
+    	long smax = Long.MIN_VALUE;
+    	long tmax = Long.MIN_VALUE;
+    	
+    	for (int i = 0; i < nums.length; i++) {
+			
+    		if(nums[i] > max) {
+    			tmax = smax;
+    			smax = max;
+    			max = nums[i];
+    		} else if(nums[i] > smax && nums[i] < max) {
+    			tmax = smax;
+    			smax = nums[i];
+    		} else if(nums[i] > tmax && nums[i] < smax) {
+    			tmax = nums[i];
+    		}
+		}
+    	
+    	long returnNumber = tmax == Long.MIN_VALUE ? max : tmax; 
+    	return (int) returnNumber;
+    }
+    
+    public static void main(String[] args) {
+		int[] nums = {1,2,-2147483648};
+    	System.out.println(thirdMax(nums));
+	}
 }
