@@ -1,7 +1,9 @@
 package io.gonzajf.leetCode.arrays;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ArraySolutions {
@@ -284,8 +286,20 @@ public class ArraySolutions {
     	return (int) returnNumber;
     }
     
-    public static void main(String[] args) {
-		int[] nums = {1,2,-2147483648};
-    	System.out.println(thirdMax(nums));
-	}
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        
+    	List<Integer> list = new ArrayList<>();
+    	
+    	for (int i = 0; i < nums.length; i++) {
+    		nums[Math.abs(nums[i])-1] = -Math.abs(nums[Math.abs(nums[i])-1]);
+    	}
+    	
+    	for (int i = 0; i < nums.length; i++) {
+			
+    		if(nums[i] > 0) {
+    			list.add(i+1);
+    		}
+		}
+    	return list;
+    }
 }
