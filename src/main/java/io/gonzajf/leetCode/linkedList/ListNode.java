@@ -26,11 +26,47 @@ public class ListNode {
 		while (fast != null && fast.next != null) {
 			fast = fast.next.next;
 			slow = slow.next;
-			
-			if(fast == slow) {
+
+			if (fast == slow) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Given a linked list, return the node where the cycle begins. 
+	 * If there is no cycle, return null.
+	 * To represent a cycle in the given linked list, we use an integer pos which represents 
+	 * the position (0-indexed) in the linked list where tail connects to. 
+	 * If pos is -1, then there is no cycle in the linked list.
+	 */
+	public static ListNode detectCycle(ListNode head) {
+
+		// base case to avoid null pointer exception
+		if (head == null || head.next == null) {
+			return null;
+		}
+
+		// Step 1: Find if there exist a cycle
+		ListNode slow = head;
+		ListNode fast = head.next;
+		while (slow != fast) {
+
+			if (fast == null || fast.next == null) {
+				return null;
+			}
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		// Step 2: Find where the cycle is
+		ListNode slow2 = head;
+		slow = slow.next;
+		while (slow != slow2) {
+			slow = slow.next;
+			slow2 = slow2.next;
+		}
+		return slow;
 	}
 }
