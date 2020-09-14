@@ -125,4 +125,20 @@ public class ListNode {
 		second.next = second.next.next;
 		return dummy.next;
 	}
+	
+	/**
+	 * Reverse a singly linked list.
+	 */
+    public static ListNode reverseList(ListNode head) {
+    	
+    	ListNode prev = null;
+    	
+    	while(head != null) {
+    		ListNode nextNode = head.next;
+    		head.next = prev;
+    		prev = head;
+    		head = nextNode;
+    	}
+    	return prev;
+    }
 }
