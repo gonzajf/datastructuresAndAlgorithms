@@ -141,4 +141,27 @@ public class ListNode {
     	}
     	return prev;
     }
+    
+    /**
+     * Remove all elements from a linked list of integers that have value val.
+     */
+    public static ListNode removeElements(ListNode head, int val) {
+        
+    	if (head == null) {
+    		return null;
+    	}
+    	
+    	ListNode currentNode = new ListNode(-1);
+    	currentNode.next = head;
+    	head = currentNode;
+    	
+    	while (currentNode.next != null) {
+    		if (currentNode.next.val == val) {
+    			currentNode.next = currentNode.next.next;
+    		} else {
+    			currentNode = currentNode.next;
+    		}
+    	}
+    	return head.next;
+    }
 }
