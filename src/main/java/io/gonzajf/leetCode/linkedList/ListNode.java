@@ -104,7 +104,8 @@ public class ListNode {
 	}
 
 	/**
-	 * Given a linked list, remove the n-th node from the end of list and return its head.
+	 * Given a linked list, remove the n-th node from the end of list and return its
+	 * head.
 	 */
 	public static ListNode removeNthFromEnd(ListNode head, int n) {
 
@@ -125,43 +126,68 @@ public class ListNode {
 		second.next = second.next.next;
 		return dummy.next;
 	}
-	
+
 	/**
 	 * Reverse a singly linked list.
 	 */
-    public static ListNode reverseList(ListNode head) {
-    	
-    	ListNode prev = null;
-    	
-    	while(head != null) {
-    		ListNode nextNode = head.next;
-    		head.next = prev;
-    		prev = head;
-    		head = nextNode;
-    	}
-    	return prev;
-    }
-    
-    /**
-     * Remove all elements from a linked list of integers that have value val.
-     */
-    public static ListNode removeElements(ListNode head, int val) {
-        
-    	if (head == null) {
-    		return null;
-    	}
-    	
-    	ListNode currentNode = new ListNode(-1);
-    	currentNode.next = head;
-    	head = currentNode;
-    	
-    	while (currentNode.next != null) {
-    		if (currentNode.next.val == val) {
-    			currentNode.next = currentNode.next.next;
-    		} else {
-    			currentNode = currentNode.next;
-    		}
-    	}
-    	return head.next;
-    }
+	public static ListNode reverseList(ListNode head) {
+
+		ListNode prev = null;
+
+		while (head != null) {
+			ListNode nextNode = head.next;
+			head.next = prev;
+			prev = head;
+			head = nextNode;
+		}
+		return prev;
+	}
+
+	/**
+	 * Remove all elements from a linked list of integers that have value val.
+	 */
+	public static ListNode removeElements(ListNode head, int val) {
+
+		if (head == null) {
+			return null;
+		}
+
+		ListNode currentNode = new ListNode(-1);
+		currentNode.next = head;
+		head = currentNode;
+
+		while (currentNode.next != null) {
+			if (currentNode.next.val == val) {
+				currentNode.next = currentNode.next.next;
+			} else {
+				currentNode = currentNode.next;
+			}
+		}
+		return head.next;
+	}
+
+	/**
+	 * Given a singly linked list, group all odd nodes together followed by the even
+	 * nodes. Please note here we are talking about the node number and not the
+	 * value in the nodes.
+	 */
+	public static ListNode oddEvenList(ListNode head) {
+
+			if(head == null) {
+				return null;
+			}
+			
+			ListNode odd = head;
+			ListNode even = head.next;
+			ListNode evenHead = even;
+		
+			while(even != null && even.next != null) {
+				odd.next = even.next;
+				odd = odd.next;
+				even.next = odd.next;
+				even = even.next;
+			}
+			odd.next = evenHead;
+			return head;
+	}
 }
