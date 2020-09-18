@@ -173,21 +173,62 @@ public class ListNode {
 	 */
 	public static ListNode oddEvenList(ListNode head) {
 
-			if(head == null) {
-				return null;
+		if (head == null) {
+			return null;
+		}
+
+		ListNode odd = head;
+		ListNode even = head.next;
+		ListNode evenHead = even;
+
+		while (even != null && even.next != null) {
+			odd.next = even.next;
+			odd = odd.next;
+			even.next = odd.next;
+			even = even.next;
+		}
+		odd.next = evenHead;
+		return head;
+	}
+
+	/**
+	 * Given a singly linked list, determine if it is a palindrome.
+	 */
+	public static boolean isPalindrome(ListNode head) {
+
+		ListNode fast = head;
+		ListNode slow = head;
+
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		fast = head;
+		slow = reverse(slow);
+
+		while (slow != null) {
+
+			if (slow.val != fast.val) {
+				return false;
 			}
-			
-			ListNode odd = head;
-			ListNode even = head.next;
-			ListNode evenHead = even;
-		
-			while(even != null && even.next != null) {
-				odd.next = even.next;
-				odd = odd.next;
-				even.next = odd.next;
-				even = even.next;
-			}
-			odd.next = evenHead;
-			return head;
+			slow = slow.next;
+			fast = fast.next;
+		}
+		return true;
+	}
+
+	private static ListNode reverse(ListNode head) {
+
+		ListNode prevNode = null;
+
+		while (head != null) {
+			ListNode nextNode = head.next;
+			head.next = prevNode;
+			prevNode = head;
+			head = nextNode;
+		}
+
+		return prevNode;
 	}
 }
